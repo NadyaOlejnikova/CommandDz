@@ -35,25 +35,30 @@ public class Main {
                     continue;
                 }
                 int productCount = Integer.parseInt(parts[1]); //  выбор количества продуктов
-                if (productCount > 100 || productCount <= 0) {
+                if (productCount > 10000) {
                     System.out.println("Вы ввели некорректное кол-во продукта. Попробуйте снова!");
                     continue;
                 }
+                if (productCount == 0) {
+                    productsCount[productNumber] = 0;
+                }
                 productsCount[productNumber] += productCount;
+
             } catch (NumberFormatException e) {
                 System.out.println("Вы ввели текст заместо числа. Попробуйте снова!");
                 continue;
             }
         }
-
         System.out.println("Ваша корзина:");
         int sum = 0;
         for (int i = 0; i < productsCount.length; i++) {
             int allCountProduct = productsCount[i];
             int priceSumByProduct = prices[i] * allCountProduct;
-            if (allCountProduct > 0) {
+            if (allCountProduct >= 0) {
                 System.out.println(products[i] + " " + allCountProduct + " шт. в сумме " + priceSumByProduct + " руб.");
                 sum += priceSumByProduct;
+            } else {
+                System.out.println("Сумма товаров некорректна !   " + products[i] + "  " + allCountProduct);
             }
         }
         System.out.println("Итого: " + sum + " руб.");
